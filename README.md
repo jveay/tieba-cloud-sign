@@ -6,5 +6,5 @@
 
         apt-get install python3-pip 安装pip3
         pip3 install docker-compose  安装docker-compose
-        下载docker-compose.yml使用在该目录docker-compose up -d 会自动拉取数据库
+        下载docker-compose.yml在该目录docker-compose up -d 会自动拉取数据库
 
