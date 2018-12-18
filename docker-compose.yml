@@ -1,8 +1,10 @@
 version: '3'
+
 services:
 
   web:
     image: "jveay/tieba-cloud-sign"
+    container_name: tieba-cloud-sign
     restart: always
     environment:
       DB_HOST: db:3306
@@ -12,6 +14,9 @@ services:
       CSRF: "false"
     ports:
       - "8888:80"
+    networks:
+         tieba:
+            ipv4_address: 172.19.0.3
     links:
       - db
     depends_on:
@@ -21,9 +26,20 @@ services:
 
   db:
     image: "arm64v8/mariadb"
+    container_name: tieba-db
     restart: always
+    networks:
+         tieba:
+            ipv4_address: 172.19.0.2
     environment:
       MYSQL_DATABASE: tiebacloud
       MYSQL_ROOT_PASSWORD: janejane123456
     volumes:
       - /srv/dev-disk-by-label-word:/var/lib/mysql
+
+networks:
+   tieba:
+      ipam:
+         config:
+         - subnet: 172.19.0.0/16
+           gateway: 172.19.0.1
