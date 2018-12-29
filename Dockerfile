@@ -5,5 +5,6 @@ RUN apt-get update && \
     apt-get install -y \
     zlib1g-dev \
     vim && \
+    rm -rf /var/lib/apt/lists/*; \
     docker-php-ext-install mysqli zip \
     && docker-php-ext-enable mysqli zip
